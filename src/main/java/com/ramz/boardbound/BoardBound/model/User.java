@@ -7,18 +7,22 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "board_game_publisher")
-public class BoardGamePublisher {
+@Table(name = "players")
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false, unique = true)
-    private String name;
+    private String username;
 
-    @OneToMany(mappedBy = "publisher", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnoreProperties("publisher")
-    private List<BoardGame> boardGames;
+    @Column(nullable = false)
+    private String email;
+
+    @ManyToMany(mappedBy = "players")
+    @JsonIgnoreProperties("players")
+    private List<Game> games;
 }
+
 
 
