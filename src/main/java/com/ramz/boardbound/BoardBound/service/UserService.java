@@ -1,5 +1,6 @@
 package com.ramz.boardbound.BoardBound.service;
 
+import com.ramz.boardbound.BoardBound.model.BoardGamePublisher;
 import com.ramz.boardbound.BoardBound.model.User;
 import com.ramz.boardbound.BoardBound.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,10 @@ public class UserService {
 
     public Optional<User> getUserById(Long id) {
         return userRepository.findById(id);
+    }
+
+    public User getUserByEmail(String email){
+        return userRepository.getUserByEmail(email);
     }
 
     public User createUser(User user) {

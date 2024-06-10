@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 @Repository
 public interface PublisherRepository extends JpaRepository<BoardGamePublisher, Long> {
-    List<BoardGamePublisher> findBoardGamePublisherByName(String name);
+    List<BoardGamePublisher> findBoardGamePublisherByName(String email);
 }
 

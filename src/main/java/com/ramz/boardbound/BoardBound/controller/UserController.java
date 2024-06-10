@@ -1,5 +1,6 @@
 package com.ramz.boardbound.BoardBound.controller;
 
+import com.ramz.boardbound.BoardBound.model.BoardGame;
 import com.ramz.boardbound.BoardBound.model.User;
 import com.ramz.boardbound.BoardBound.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,12 @@ public class UserController {
     public ResponseEntity<User> getUserById(@PathVariable Long id) {
         Optional<User> user = userService.getUserById(id);
         return user.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/email")
+    public ResponseEntity<User> getUserByEmail(@RequestParam String email){
+        User user = userService.getUserByEmail(email);
+        return ResponseEntity.ok(user);
     }
 
     @PostMapping
