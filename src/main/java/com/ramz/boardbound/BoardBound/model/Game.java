@@ -31,7 +31,7 @@ public class Game {
     private String place;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = true)
+    @JoinColumn(name = "user_id")
     @JsonIgnoreProperties("users")
     private User creatorPlayer;
 
