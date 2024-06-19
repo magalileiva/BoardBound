@@ -32,7 +32,7 @@ public class Game {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    @JsonIgnoreProperties("users")
+    @JsonIgnoreProperties({"comments", "games"})
     private User creatorPlayer;
 
     @Column(nullable = false, columnDefinition = "VARCHAR(255) DEFAULT 'open'")
@@ -40,7 +40,7 @@ public class Game {
 
     @ManyToOne
     @JoinColumn(name = "board_game_id", nullable = false)
-    @JsonIgnoreProperties("games")
+    @JsonIgnoreProperties({"games"})
     private BoardGame boardGame;
 
     @ManyToMany
@@ -49,11 +49,10 @@ public class Game {
             joinColumns = @JoinColumn(name = "game_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
-    @JsonIgnoreProperties("games")
+    @JsonIgnoreProperties({"comments", "games"})
     private List<User> players;
 
     @OneToMany(mappedBy = "game", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnoreProperties("game")
+    @JsonIgnoreProperties({"game"})
     private List<Comment> comments;
 }
-

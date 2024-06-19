@@ -17,15 +17,11 @@ public class Comment {
 
     @ManyToOne
     @JoinColumn(name = "game_id", nullable = false)
-    @JsonIgnoreProperties("comments")
+    @JsonIgnoreProperties({"comments", "players", "creatorPlayer"})
     private Game game;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    @JsonIgnoreProperties("comments")
+    @JoinColumn(name = "user_id", nullable = false)
+    @JsonIgnoreProperties({"comments", "games"})
     private User user;
 }
-
-
-
-
