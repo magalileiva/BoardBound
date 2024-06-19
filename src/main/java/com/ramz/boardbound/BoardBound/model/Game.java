@@ -30,6 +30,11 @@ public class Game {
     @Column(nullable = false)
     private String place;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = true)
+    @JsonIgnoreProperties("users")
+    private User creatorPlayer;
+
     @Column(nullable = false, columnDefinition = "VARCHAR(255) DEFAULT 'open'")
     private String status = "open";
 
