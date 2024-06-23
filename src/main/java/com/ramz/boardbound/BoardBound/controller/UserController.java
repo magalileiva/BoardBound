@@ -1,5 +1,6 @@
 package com.ramz.boardbound.BoardBound.controller;
 
+import com.ramz.boardbound.BoardBound.dto.UserMatchesResponse;
 import com.ramz.boardbound.BoardBound.model.BoardGame;
 import com.ramz.boardbound.BoardBound.model.User;
 import com.ramz.boardbound.BoardBound.service.UserService;
@@ -52,6 +53,16 @@ public class UserController {
             return ResponseEntity.ok().build();
         } else {
             return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/{id}/matches")
+    public ResponseEntity<UserMatchesResponse> getUserMatches(@PathVariable Long id) {
+        UserMatchesResponse response = userService.getUserMatches(id);
+        if (response.getCreatedMatches().isEmpty() && response.getPlayedMatches().isEmpty()) {
+            return ResponseEntity.notFound().build();
+        } else {
+            return ResponseEntity.ok(response);
         }
     }
 }

@@ -19,6 +19,12 @@ public interface GameRepository extends JpaRepository<Game, Long> {
     List<Game> findByStatus(String status);
 
     List<Game> findByIdAndStatus(Long id, String status);
+
+    @Query("SELECT m FROM Game m WHERE m.creatorPlayer.id = :userId")
+    List<Game> findCreatedMatchesByUserId(@Param("userId") Long userId);
+
+    @Query("SELECT m FROM Game m JOIN m.players p WHERE p.id = :userId")
+    List<Game> findPlayedMatchesByUserId(@Param("userId") Long userId);
 }
 
 

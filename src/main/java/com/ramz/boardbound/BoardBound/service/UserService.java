@@ -1,7 +1,9 @@
 package com.ramz.boardbound.BoardBound.service;
 
-import com.ramz.boardbound.BoardBound.model.BoardGamePublisher;
+import com.ramz.boardbound.BoardBound.dto.UserMatchesResponse;
+import com.ramz.boardbound.BoardBound.model.Game;
 import com.ramz.boardbound.BoardBound.model.User;
+import com.ramz.boardbound.BoardBound.repository.GameRepository;
 import com.ramz.boardbound.BoardBound.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +16,19 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private GameRepository matchRepository;
+
+    public UserMatchesResponse getUserMatches(Long userId) {
+        List<Game> createdMatches = matchRepository.findCreatedMatchesByUserId(userId);
+        List<Game> playedMatches = matchRepository.findPlayedMatchesByUserId(userId);
+
+        UserMatchesResponse response = new UserMatchesResponse();
+        response.setCreatedMatches(createdMatches);
+        response.setPlayedMatches(playedMatches);
+        return response;
+    }
 
     public List<User> getAllUsers() {
         return userRepository.findAll();
